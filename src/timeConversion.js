@@ -3,8 +3,7 @@ export default function epochToTime(x, shift) {
   const date = new Date(shiftedTime * 1000);
   const time = date.getHours();
   if (time < 10) {
-    return `0${time}`;
+    return `0${time}:00`;
   }
-  return time;
+  return `${time}:00`;
 }
-
