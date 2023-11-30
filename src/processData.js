@@ -1,5 +1,6 @@
 import kelvinToCelcius from "./tempConvertor";
 import epochToTime from "./timeConversion";
+import dayOrNightChecker from "./dayOrNightChecker";
 
 const forecastInfo = {
   temp0hr: "",
@@ -46,7 +47,7 @@ const currentInfo = {
 
 export default function processData(forecastData, currentData) {
   // console.log(forecastData);
-  // console.log(currentData);
+  console.log(currentData);
   currentInfo.city = currentData.name;
   currentInfo.country = currentData.sys.country;
   currentInfo.description = currentData.weather[0].description;
@@ -55,7 +56,11 @@ export default function processData(forecastData, currentData) {
   currentInfo.feelsLike = kelvinToCelcius(currentData.main.feels_like);
   currentInfo.timezone = currentData.timezone;
   currentInfo.currentTime = epochToTime(currentData.dt, currentData.timezone);
-  currentInfo.dayOrNight = forecastData.list[0].sys.pod;
+  currentInfo.dayOrNight = dayOrNightChecker(
+    currentData.sys.sunrise,
+    currentData.sys.sunset,
+    currentData.dt
+  );
   // above is data processing for current weather
   // below is data processng for forecast weather
   forecastInfo.temp0hr = kelvinToCelcius(forecastData.list[0].main.temp);
@@ -107,6 +112,6 @@ export default function processData(forecastData, currentData) {
     forecastData.list[6].dt,
     currentData.timezone
   );
-  console.log(forecastInfo);
+  // console.log(forecastInfo);
   console.log(currentInfo);
 }

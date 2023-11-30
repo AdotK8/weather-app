@@ -1,6 +1,6 @@
 import processData from "./processData";
 
-const location = "london";
+const location = "sao paulo";
 
 export default async function retrieveData() {
   const apiKey = "cb561535d4382bd95e0f2ab965974e4e";
