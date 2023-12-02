@@ -125,3 +125,5 @@ export default function processData(forecastData, currentData) {
   console.log(forecastInfo);
   console.log(currentInfo);
 }
+
+export { forecastInfo, currentInfo };

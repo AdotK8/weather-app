@@ -1,4 +1,6 @@
 import retrieveData from "./retrieveData";
 import "./styles/styles.css";
+import searchAndSubmit from "./searchButton";
 
-retrieveData();
+retrieveData("london");
+searchAndSubmit();
