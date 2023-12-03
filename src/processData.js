@@ -1,43 +1,51 @@
-import { kelvinToCelcius, kelvinToFarr } from "./tempConvertor";
+import { kelvinToCelcius } from "./tempConvertor";
 import epochToTime from "./timeConversion";
-import dayOrNightChecker from "./dayOrNightChecker";
+import { updateTemps, updateTimes, updateCurrentInfo } from "./displayToDom";
+import updateImages from "./imageUpdater";
 
 const forecastInfo = {
-  temp0hrC: "",
-  temp0hrF: "",
-  desc0hr: "",
-  time0hr: "",
-  dayOrNight0hr: "",
-  temp3hrC: "",
-  temp3hrF: "",
-  desc3hr: "",
-  time3hr: "",
-  dayOrNight3hr: "",
-  temp6hrC: "",
-  temp6hrF: "",
-  desc6hr: "",
-  time6hr: "",
-  dayOrNight6hr: "",
-  temp9hrC: "",
-  temp9hrF: "",
-  desc9hr: "",
-  time9hr: "",
-  dayOrNight9hr: "",
-  temp12hrC: "",
-  temp12hrF: "",
-  desc12hr: "",
-  time12hr: "",
-  dayOrNight12hr: "",
-  temp15hrC: "",
-  temp15hrF: "",
-  desc15hr: "",
-  time15hr: "",
-  dayOrNight15hr: "",
-  temp18hrC: "",
-  temp18hrF: "",
-  desc18hr: "",
-  time18hr: "",
-  dayOrNight18hr: "",
+  0: {
+    temp: "",
+    description: "",
+    time: "",
+    icon: "",
+  },
+  1: {
+    temp: "",
+    description: "",
+    time: "",
+    icon: "",
+  },
+  2: {
+    temp: "",
+    description: "",
+    time: "",
+    icon: "",
+  },
+  3: {
+    temp: "",
+    description: "",
+    time: "",
+    icon: "",
+  },
+  4: {
+    temp: "",
+    description: "",
+    time: "",
+    icon: "",
+  },
+  5: {
+    temp: "",
+    description: "",
+    time: "",
+    icon: "",
+  },
+  6: {
+    temp: "",
+    description: "",
+    time: "",
+    icon: "",
+  },
 };
 
 const currentInfo = {
@@ -47,83 +55,82 @@ const currentInfo = {
   timezone: "",
   description: "",
   windSpeed: "",
-  currentTempC: "",
-  currentTempF: "",
+  currentTemp: "",
   feelsLike: "",
-  dayOrNight: "",
+  tempUnit: "C",
+  icon: "",
 };
 
 export default function processData(forecastData, currentData) {
   // console.log(forecastData);
   // console.log(currentData);
-
   currentInfo.city = currentData.name;
   currentInfo.country = currentData.sys.country;
   currentInfo.description = currentData.weather[0].description;
   currentInfo.windSpeed = currentData.wind.speed;
-  currentInfo.currentTempC = kelvinToCelcius(currentData.main.temp);
-  currentInfo.currentTempF = kelvinToFarr(currentData.main.temp);
+  currentInfo.currentTemp = kelvinToCelcius(currentData.main.temp);
   currentInfo.feelsLike = kelvinToCelcius(currentData.main.feels_like);
   currentInfo.timezone = currentData.timezone;
   currentInfo.currentTime = epochToTime(currentData.dt, currentData.timezone);
-  currentInfo.dayOrNight = dayOrNightChecker(
-    currentData.sys.sunrise,
-    currentData.sys.sunset,
-    currentData.dt
-  );
+  currentInfo.icon = currentData.weather[0].icon;
   // above is data processing for current weather
   // below is data processng for forecast weather
-  forecastInfo.temp0hrC = kelvinToCelcius(forecastData.list[0].main.temp);
-  forecastInfo.desc0hr = forecastData.list[0].weather[0].description;
-  forecastInfo.dayOrNight0hr = forecastData.list[0].sys.pod;
-  forecastInfo.time0hr = epochToTime(
+  forecastInfo["0"].temp = kelvinToCelcius(forecastData.list[0].main.temp);
+  forecastInfo["0"].description = forecastData.list[0].weather[0].description;
+  forecastInfo["0"].icon = forecastData.list[0].weather[0].icon;
+  forecastInfo["0"].time = epochToTime(
     forecastData.list[0].dt,
     currentData.timezone
   );
-  forecastInfo.temp3hrC = kelvinToCelcius(forecastData.list[1].main.temp);
-  forecastInfo.desc3hr = forecastData.list[1].weather[0].description;
-  forecastInfo.dayOrNight3hr = forecastData.list[1].sys.pod;
-  forecastInfo.time3hr = epochToTime(
+  forecastInfo["1"].temp = kelvinToCelcius(forecastData.list[1].main.temp);
+  forecastInfo["1"].description = forecastData.list[1].weather[0].description;
+  forecastInfo["1"].icon = forecastData.list[1].weather[0].icon;
+  forecastInfo["1"].time = epochToTime(
     forecastData.list[1].dt,
     currentData.timezone
   );
-  forecastInfo.temp6hrC = kelvinToCelcius(forecastData.list[2].main.temp);
-  forecastInfo.desc6hr = forecastData.list[2].weather[0].description;
-  forecastInfo.dayOrNight6hr = forecastData.list[2].sys.pod;
-  forecastInfo.time6hr = epochToTime(
+  forecastInfo["2"].temp = kelvinToCelcius(forecastData.list[2].main.temp);
+  forecastInfo["2"].description = forecastData.list[2].weather[0].description;
+  forecastInfo["2"].icon = forecastData.list[2].weather[0].icon;
+  forecastInfo["2"].time = epochToTime(
     forecastData.list[2].dt,
     currentData.timezone
   );
-  forecastInfo.temp9hrC = kelvinToCelcius(forecastData.list[3].main.temp);
-  forecastInfo.desc9hr = forecastData.list[3].weather[0].description;
-  forecastInfo.dayOrNight9hr = forecastData.list[3].sys.pod;
-  forecastInfo.time9hr = epochToTime(
+  forecastInfo["3"].temp = kelvinToCelcius(forecastData.list[3].main.temp);
+  forecastInfo["3"].description = forecastData.list[3].weather[0].description;
+  forecastInfo["3"].icon = forecastData.list[3].weather[0].icon;
+  forecastInfo["3"].time = epochToTime(
     forecastData.list[3].dt,
     currentData.timezone
   );
-  forecastInfo.temp12hrC = kelvinToCelcius(forecastData.list[4].main.temp);
-  forecastInfo.desc12hr = forecastData.list[4].weather[0].description;
-  forecastInfo.dayOrNight12hr = forecastData.list[4].sys.pod;
-  forecastInfo.time12hr = epochToTime(
+  forecastInfo["4"].temp = kelvinToCelcius(forecastData.list[4].main.temp);
+  forecastInfo["4"].description = forecastData.list[4].weather[0].description;
+  forecastInfo["4"].icon = forecastData.list[4].weather[0].icon;
+  forecastInfo["4"].time = epochToTime(
     forecastData.list[4].dt,
     currentData.timezone
   );
-  forecastInfo.temp15hrC = kelvinToCelcius(forecastData.list[5].main.temp);
-  forecastInfo.desc15hr = forecastData.list[5].weather[0].description;
-  forecastInfo.dayOrNight15hr = forecastData.list[5].sys.pod;
-  forecastInfo.time15hr = epochToTime(
+  forecastInfo["5"].temp = kelvinToCelcius(forecastData.list[5].main.temp);
+  forecastInfo["5"].description = forecastData.list[5].weather[0].description;
+  forecastInfo["5"].icon = forecastData.list[5].weather[0].icon;
+  forecastInfo["5"].time = epochToTime(
     forecastData.list[5].dt,
     currentData.timezone
   );
-  forecastInfo.temp18hrC = kelvinToCelcius(forecastData.list[6].main.temp);
-  forecastInfo.desc18hr = forecastData.list[6].weather[0].description;
-  forecastInfo.dayOrNight18hr = forecastData.list[6].sys.pod;
-  forecastInfo.time18hr = epochToTime(
+  forecastInfo["6"].temp = kelvinToCelcius(forecastData.list[6].main.temp);
+  forecastInfo["6"].description = forecastData.list[6].weather[0].description;
+  forecastInfo["6"].icon = forecastData.list[6].weather[0].icon;
+  forecastInfo["6"].time = epochToTime(
     forecastData.list[6].dt,
     currentData.timezone
   );
-  console.log(forecastInfo);
-  console.log(currentInfo);
+  // console.log(forecastInfo);
+  // console.log(currentInfo);
+
+  updateTemps();
+  updateTimes();
+  updateCurrentInfo();
+  updateImages();
 }
 
 export { forecastInfo, currentInfo };
