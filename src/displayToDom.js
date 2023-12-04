@@ -2,17 +2,27 @@ import { forecastInfo, currentInfo } from "./processData";
 
 export function updateTemps() {
   const currentTempDOM = document.querySelector("#current-temp");
-  currentTempDOM.innerHTML = `${currentInfo.currentTemp}&deg;${currentInfo.tempUnit}`;
-
   const feelsLikeDOM = document.querySelector("#feels-like");
-  feelsLikeDOM.innerHTML = `Feels Like: ${currentInfo.feelsLike}&deg;${currentInfo.tempUnit}`;
-
   const forecastTempDOM = document.querySelectorAll(".forecast-temp");
 
-  for (let i = 0; i < forecastTempDOM.length; i++) {
-    forecastTempDOM[i].innerHTML = `${forecastInfo[`${i}`].temp}&deg;${
-      currentInfo.tempUnit
-    }`;
+  if (currentInfo.tempUnit === "C") {
+    currentTempDOM.innerHTML = `${currentInfo.currentTempC}&deg;${currentInfo.tempUnit}`;
+    feelsLikeDOM.innerHTML = `Feels Like: ${currentInfo.feelsLikeC}&deg;${currentInfo.tempUnit}`;
+
+    for (let i = 0; i < forecastTempDOM.length; i++) {
+      forecastTempDOM[i].innerHTML = `${forecastInfo[`${i}`].tempC}&deg;${
+        currentInfo.tempUnit
+      }`;
+    }
+  } else if (currentInfo.tempUnit === "F") {
+    currentTempDOM.innerHTML = `${currentInfo.currentTempF}&deg;${currentInfo.tempUnit}`;
+    feelsLikeDOM.innerHTML = `Feels Like: ${currentInfo.feelsLikeF}&deg;${currentInfo.tempUnit}`;
+
+    for (let i = 0; i < forecastTempDOM.length; i++) {
+      forecastTempDOM[i].innerHTML = `${forecastInfo[`${i}`].tempF}&deg;${
+        currentInfo.tempUnit
+      }`;
+    }
   }
 }
 

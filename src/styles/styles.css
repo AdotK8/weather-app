@@ -8,19 +8,80 @@ body {
   margin: 0;
 }
 
-input,
+.header {
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+  padding-top: 20px;
+  justify-items: end;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 30vw;
+}
+
+.button {
+  height: 50px;
+  width: 100px;
+  background-color: #86aec3;
+  border-radius: 200px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+
+.button::before {
+  position: absolute;
+  place-content: center;
+  background-color: white;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 100px;
+  margin: 2.5px;
+  transition: 0.2s;
+  z-index: 1;
+}
+
+.celcius::before {
+  content: "\00b0 C";
+  color: #86aec3;
+}
+
+.farrenheit::before {
+  content: "\00b0 F";
+  color: #5f6f77;
+}
+
+#check:checked + .button {
+  background-color: #5f6f77;
+}
+
+#check:checked + .button::before {
+  transform: translateX(50px);
+}
+
+#check {
+  display: none;
+}
+
+#search-bar,
 .sig,
 .current,
 .forecast,
-h1 {
+h1,
+.button {
   font-family: "Inter", sans-serif;
 }
 
 h1 {
   color: #5f6f77;
   margin: 0;
-  padding-top: 20px;
-  padding-left: 100px;
 }
 
 .top {
@@ -40,7 +101,7 @@ form {
   gap: 5px;
 }
 
-input {
+#search-bar {
   width: 30vw;
   height: 5vh;
   font-size: 20px;
