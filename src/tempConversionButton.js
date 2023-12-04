@@ -1,6 +1,5 @@
-import { celciusToFarr } from "./tempConvertor";
-import { currentInfo, forecastInfo } from "./processData";
 import { updateTemps } from "./displayToDom";
+import { currentInfo } from "./processData";
 
 const tempButton = document.querySelector(".button");
 
@@ -11,11 +10,9 @@ export default function toggleButton() {
 
     if (currentInfo.tempUnit === "C") {
       currentInfo.tempUnit = "F";
-      console.log(currentInfo);
       updateTemps();
     } else if (currentInfo.tempUnit === "F") {
       currentInfo.tempUnit = "C";
-      console.log(currentInfo);
       updateTemps();
     }
   });

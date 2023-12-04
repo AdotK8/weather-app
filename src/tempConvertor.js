@@ -5,7 +5,7 @@ function kelvinToCelcius(K) {
 
 function kelvinToFarr(K) {
   const F = (K - 273.15) * 1.8 + 32;
-  return F.toFixed(1);
+  return F.toFixed();
 }
 
 export { kelvinToCelcius, kelvinToFarr };
