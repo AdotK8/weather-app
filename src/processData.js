@@ -3,6 +3,7 @@ import epochToTime from "./timeConversion";
 import { updateTemps, updateTimes, updateCurrentInfo } from "./displayToDom";
 import updateImages from "./imageUpdater";
 
+// initialising object to store forecast info
 const forecastInfo = {
   0: {},
   1: {},
@@ -13,24 +14,13 @@ const forecastInfo = {
   6: {},
 };
 
+// initialising object to store current info with default unit of Celcius
 const currentInfo = {
-  city: "",
-  country: "",
-  currentTime: "",
-  timezone: "",
-  description: "",
-  windSpeed: "",
-  currentTempC: "",
-  currentTempF: "",
-  feelsLikeC: "",
-  feelsLikeF: "",
   tempUnit: "C",
-  icon: "",
 };
 
 export default function processData(forecastData, currentData) {
-  // console.log(forecastData);
-  // console.log(currentData);
+  // processing data for current weather information
   currentInfo.city = currentData.name;
   currentInfo.country = currentData.sys.country;
   currentInfo.description = currentData.weather[0].description;
@@ -42,9 +32,7 @@ export default function processData(forecastData, currentData) {
   currentInfo.timezone = currentData.timezone;
   currentInfo.currentTime = epochToTime(currentData.dt, currentData.timezone);
   currentInfo.icon = currentData.weather[0].icon;
-  // above is data processing for current weather
-
-  // below is data processng for forecast weather
+  // processing data for forecast weather information
   for (let i = 0; i <= 6; i++) {
     forecastInfo[i].tempC = kelvinToCelcius(forecastData.list[i].main.temp);
     forecastInfo[i].tempF = kelvinToFarr(forecastData.list[i].main.temp);
@@ -55,9 +43,7 @@ export default function processData(forecastData, currentData) {
       currentData.timezone
     );
   }
-  // console.log(forecastInfo);
-  // console.log(currentInfo);
-
+  // displaying newly processed data
   updateTemps();
   updateTimes();
   updateCurrentInfo();

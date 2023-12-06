@@ -6,6 +6,8 @@ body {
   background-color: #c8d4da;
   padding: 0;
   margin: 0;
+  background-image: url(../images/background.jpg);
+  background-size: cover;
 }
 
 .header {
@@ -81,12 +83,12 @@ h1,
 }
 
 h1 {
-  color: #5f6f77;
+  color: rgba(255, 255, 255, 0.8);
   margin: 0;
 }
 
 .top {
-  height: 20vh;
+  /* height: max(100px, 20vh); */
 }
 
 #magnify-icon {
@@ -103,22 +105,33 @@ form {
 }
 
 #search-bar {
-  width: 30vw;
-  height: 5vh;
-  font-size: 20px;
+  /* width: 30vw; */
+  width: max(250px, 30vw);
+  height: 35px;
+  font-size: clamp(15px, 1.5vw, 5rem);
   border-radius: 20px;
   padding-left: 15px;
   border: 0;
+  background-color: rgba(255, 255, 255, 0.6);
   color: rgba(95, 111, 119, 1);
+}
+
+.valid::placeholder {
+  color: rgba(95, 111, 119, 1);
+}
+
+.error::placeholder {
+  color: rgba(239, 125, 125, 0.667);
 }
 
 #country {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
+
 /* middle section  */
 
 .main {
-  height: 75vh;
+  height: max(500px, 75vh);
   display: grid;
   grid-template-rows: 1fr 1fr;
   place-items: center;
@@ -129,9 +142,9 @@ form {
 }
 .current,
 .forecast {
-  height: 30vh;
-  width: 80vw;
-  background-color: rgb(255, 255, 255, 1);
+  height: max(200px, 30vh);
+  width: max(900px, 80vw);
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 100px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
@@ -148,15 +161,15 @@ form {
 }
 
 #current-temp {
-  font-size: 70px;
   font-weight: 700;
+  font-size: clamp(50px, 5vw, 10rem);
 }
 #city {
-  font-size: 50px;
+  font-size: clamp(40px, 4vw, 8rem);
 }
 
 .current2 {
-  font-size: 20px;
+  font-size: clamp(15px, 1.5vw, 5rem);
   display: grid;
   grid-template-rows: 2fr 1fr 1fr 1fr;
   place-items: center;
@@ -182,10 +195,9 @@ form {
 .forecast {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  /* padding: 10px; */
+  padding: 10px;
   text-align: center;
   color: #5f6f77;
-  /* place-items: center; */
   align-items: center;
 }
 
@@ -204,12 +216,12 @@ form {
 }
 
 .forecast-temp {
-  font-size: 30px;
+  font-size: clamp(15px, 2vw, 6rem);
   font-weight: 600;
 }
 
 .forecast-time {
-  font-size: 20px;
+  font-size: clamp(10px, 1.5vw, 5rem);
   font-weight: 400;
 }
 
