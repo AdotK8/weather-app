@@ -1,6 +1,10 @@
 * {
   /* outline: solid 1px black; */
 }
+.imagesLoader {
+  background-image: url(/images/github.svg);
+  background-image: url(/images/magnify.svg);
+}
 
 body {
   background-color: #c8d4da;
